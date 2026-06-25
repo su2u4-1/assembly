@@ -1,0 +1,40 @@
+Address     Code        Basic                        Line Source
+
+0x00400000  0xfd010113  addi x2,x2,0xffffffd0        6        addi    sp, sp, -48
+0x00400004  0x02112623  sw x1,0x0000002c(x2)         7        sw      ra, 44(sp)
+0x00400008  0x02812423  sw x8,0x00000028(x2)         8        sw      s0, 40(sp)
+0x0040000c  0x03010413  addi x8,x2,0x00000030        9        addi    s0, sp, 48
+0x00400010  0xfca42e23  sw x10,0xffffffdc(x8)        10       sw      a0, -36(s0)
+0x00400014  0xfcb42c23  sw x11,0xffffffd8(x8)        11       sw      a1, -40(s0)
+0x00400018  0xfe042623  sw x0,0xffffffec(x8)         12       sw      zero, -20(s0)
+0x0040001c  0x0200006f  jal x0,0x00000020            13       j       .L2
+0x00400020  0x100107b7  lui x15,0x00010010           15       lui     a5, %hi(.LC0)
+0x00400024  0x00078513  addi x10,x15,0               16       addi    a0, a5, %lo(.LC0)
+0x00400028  0x00400893  addi x17,x0,4                17       li      a7, 4
+0x0040002c  0x00000073  ecall                        18       ecall
+0x00400030  0xfec42783  lw x15,0xffffffec(x8)        19       lw      a5, -20(s0)
+0x00400034  0x00178793  addi x15,x15,1               20       addi    a5, a5, 1
+0x00400038  0xfef42623  sw x15,0xffffffec(x8)        21       sw      a5, -20(s0)
+0x0040003c  0xfec42703  lw x14,0xffffffec(x8)        23       lw      a4, -20(s0)
+0x00400040  0xfdc42783  lw x15,0xffffffdc(x8)        24       lw      a5, -36(s0)
+0x00400044  0xfcf74ee3  blt x14,x15,0xffffffdc       25       blt     a4, a5, .L3
+0x00400048  0xfdc42703  lw x14,0xffffffdc(x8)        26       lw      a4, -36(s0)
+0x0040004c  0x00100793  addi x15,x0,1                27       li      a5, 1
+0x00400050  0x02e7d463  bge x15,x14,0x00000028       28       ble     a4, a5, .L4
+0x00400054  0xfd842783  lw x15,0xffffffd8(x8)        29       lw      a5, -40(s0)
+0x00400058  0x00478793  addi x15,x15,4               30       addi    a5, a5, 4
+0x0040005c  0x0007a783  lw x15,0(x15)                31       lw      a5, 0(a5)
+0x00400060  0x00f00533  add x10,x0,x15               32       mv      a0, a5
+0x00400064  0x00400893  addi x17,x0,4                33       li      a7, 4
+0x00400068  0x00000073  ecall                        34       ecall
+0x0040006c  0x00a00513  addi x10,x0,10               35       li      a0, 10
+0x00400070  0x00b00893  addi x17,x0,11               36       li      a7, 11
+0x00400074  0x00000073  ecall                        37       ecall
+0x00400078  0x00000793  addi x15,x0,0                39       li      a5, 0
+0x0040007c  0x00f00533  add x10,x0,x15               40       mv      a0, a5
+0x00400080  0x02c12083  lw x1,0x0000002c(x2)         41       lw      ra, 44(sp)
+0x00400084  0x02812403  lw x8,0x00000028(x2)         42       lw      s0, 40(sp)
+0x00400088  0x03010113  addi x2,x2,0x00000030        43       addi    sp, sp, 48
+0x0040008c  0x00000513  addi x10,x0,0                44       li      a0, 0
+0x00400090  0x00a00893  addi x17,x0,10               45       li      a7, 10
+0x00400094  0x00000073  ecall                        46       ecall

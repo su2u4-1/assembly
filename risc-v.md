@@ -188,3 +188,33 @@
         lui rs1, %hi(label)
         addi rs1, rs1, %lo(label)
     ```
+- `li`: load immediate
+    - `li rd, imm`
+    ```asm
+        addi rd, zero, imm
+    ```
+- `ble`: branch if less than or equal
+    - `ble rs1, rs2, offset`
+    ```asm
+        bge rs2, rs1, offset
+    ```
+- `bgt`: branch if greater than
+    - `bgt rs1, rs2, offset`
+    ```asm
+        ble rs2, rs1, offset
+    ```
+- `mv`: move
+    - `mv rd, rs1`
+    ```asm
+        addi rd, rs1, 0
+    ```
+- `j`: jump
+    - `j offset`
+    ```asm
+        jal zero, offset
+    ```
+- `ret`: return from function
+    - `ret`
+    ```asm
+        jalr zero, ra, 0
+    ```

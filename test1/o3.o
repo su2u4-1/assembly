@@ -1,0 +1,39 @@
+Address     Code        Basic                        Line Source
+
+0x00400000  0x08a05663  bge x0,x10,0x0000008c        6        ble     a0, zero, .L6
+0x00400004  0xfe010113  addi x2,x2,0xffffffe0        7        addi    sp, sp, -32
+0x00400008  0x01212823  sw x18,16(x2)                8        sw      s2, 16(sp)
+0x0040000c  0x10010937  lui x18,0x00010010           9        lui     s2, %hi(.LC0)
+0x00400010  0x00812c23  sw x8,24(x2)                 10       sw      s0, 24(sp)
+0x00400014  0x00912a23  sw x9,20(x2)                 11       sw      s1, 20(sp)
+0x00400018  0x01312623  sw x19,12(x2)                12       sw      s3, 12(sp)
+0x0040001c  0x00112e23  sw x1,28(x2)                 13       sw      ra, 28(sp)
+0x00400020  0x00b009b3  add x19,x0,x11               14       mv      s3, a1
+0x00400024  0x00a004b3  add x9,x0,x10                15       mv      s1, a0
+0x00400028  0x00090913  addi x18,x18,0               16       addi    s2, s2, %lo(.LC0)
+0x0040002c  0x00000413  addi x8,x0,0                 17       li      s0, 0
+0x00400030  0x01200533  add x10,x0,x18               19       mv      a0, s2
+0x00400034  0x00140413  addi x8,x8,1                 20       addi    s0, s0, 1
+0x00400038  0x00400893  addi x17,x0,4                21       li      a7, 4
+0x0040003c  0x00000073  ecall                        22       ecall
+0x00400040  0xfe8498e3  bne x9,x8,0xfffffff0         23       bne     s1, s0, .L3
+0x00400044  0x00100793  addi x15,x0,1                24       li      a5, 1
+0x00400048  0x02f49463  bne x9,x15,0x00000028        25       bne     s1, a5, .L10
+0x0040004c  0x01c12083  lw x1,28(x2)                 27       lw      ra, 28(sp)
+0x00400050  0x01812403  lw x8,24(x2)                 28       lw      s0, 24(sp)
+0x00400054  0x01412483  lw x9,20(x2)                 29       lw      s1, 20(sp)
+0x00400058  0x01012903  lw x18,16(x2)                30       lw      s2, 16(sp)
+0x0040005c  0x00c12983  lw x19,12(x2)                31       lw      s3, 12(sp)
+0x00400060  0x00000513  addi x10,x0,0                32       li      a0, 0
+0x00400064  0x02010113  addi x2,x2,0x00000020        33       addi    sp, sp, 32
+0x00400068  0x00a00893  addi x17,x0,10               34       li      a7, 10
+0x0040006c  0x00000073  ecall                        35       ecall
+0x00400070  0x0049a503  lw x10,4(x19)                37       lw      a0, 4(s3)
+0x00400074  0x00400893  addi x17,x0,4                38       li      a7, 4
+0x00400078  0x00000073  ecall                        39       ecall
+0x0040007c  0x00a00513  addi x10,x0,10               40       li      a0, 10
+0x00400080  0x00b00893  addi x17,x0,11               41       li      a7, 11
+0x00400084  0x00000073  ecall                        42       ecall
+0x00400088  0xfc5ff06f  jal x0,0xffffffc4            43       j       .L2
+0x0040008c  0x00000513  addi x10,x0,0                45       li      a0, 0
+0x00400090  0x00008067  jalr x0,x1,0                 46       ret
