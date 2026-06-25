@@ -1,0 +1,16 @@
+Address     Code        Basic                        Line Source
+
+0x00400000  0xff010113  addi x2,x2,0xfffffff0        6        addi    sp, sp, -16
+0x00400004  0x00112623  sw x1,12(x2)                 7        sw      ra, 12(sp)
+0x00400008  0x00812423  sw x8,8(x2)                  8        sw      s0, 8(sp)
+0x0040000c  0x01010413  addi x8,x2,16                9        addi    s0, sp, 16
+0x00400010  0x0fc10517  auipc x10,0x0000fc10         10       la      a0, .LC0
+0x00400014  0xff050513  addi x10,x10,0xfffffff0           
+0x00400018  0x00400893  addi x17,x0,4                11       li      a7, 4
+0x0040001c  0x00000073  ecall                        12       ecall
+0x00400020  0x00c12083  lw x1,12(x2)                 13       lw      ra, 12(sp)
+0x00400024  0x00812403  lw x8,8(x2)                  14       lw      s0, 8(sp)
+0x00400028  0x01010113  addi x2,x2,16                15       addi    sp, sp, 16
+0x0040002c  0x00000513  addi x10,x0,0                16       li      a0, 0
+0x00400030  0x00a00893  addi x17,x0,10               17       li      a7, 10
+0x00400034  0x00000073  ecall                        18       ecall
