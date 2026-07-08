@@ -175,7 +175,8 @@
     |            |     |110|     |0010011|
     ```
 - `and`: bitwise and 
-    `and rd, rs1, rs2`    `// rd = rs1 & rs2` 
+    `and rd, rs1, rs2`
+    `// rd = rs1 & rs2` 
     ```
     |func7  |rs2  |rs1  |f3 |rd   |opcode |
     |-------|-----|-----|---|-----|-------|
@@ -206,9 +207,9 @@
     `slli rd, rs1, shamt` 
     `// rd = rs1 << shamt` 
     ```
-    |      |shamt |rs1  |f3 |rd   |opcode |
-    |------|------|-----|---|-----|-------|
-    |000000|      |     |001|     |0010011|
+    |func7  |shamt|rs1  |f3 |rd   |opcode |
+    |-------|-----|-----|---|-----|-------|
+    |0000000|     |     |001|     |0010011|
     ```
 - `srl`: shift right logical 
     `srl rd, rs1, rs2` 
@@ -222,9 +223,9 @@
     `srli rd, rs1, shamt` 
     `// rd = rs1 >> shamt` 
     ```
-    |      |shamt |rs1  |f3 |rd   |opcode |
-    |------|------|-----|---|-----|-------|
-    |000000|      |     |101|     |0010011|
+    |func7  |shamt|rs1  |f3 |rd   |opcode |
+    |-------|-----|-----|---|-----|-------|
+    |0000000|     |     |101|     |0010011|
     ```
 - `sra`: shift right arithmetic 
     `sra rd, rs1, rs2` 
@@ -238,9 +239,9 @@
     `srai rd, rs1, shamt` 
     `// rd = (signed)rs1 >> shamt` 
     ```
-    |      |shamt |rs1  |f3 |rd   |opcode |
-    |------|------|-----|---|-----|-------|
-    |010000|      |     |101|     |0010011|
+    |func7  |shamt|rs1  |f3 |rd   |opcode |
+    |-------|-----|-----|---|-----|-------|
+    |0100000|     |     |101|     |0010011|
     ```
 ### compare
 - `slt`: set less than 

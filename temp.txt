@@ -1,52 +1,84 @@
-0000011 lb rd, offset(rs1)
-0000011 lh rd, offset(rs1)
-0000011 lw rd, offset(rs1)
-0000011 lbu rd, offset(rs1)
-0000011 lhu rd, offset(rs1)
-0100011 sb rs2, offset(rs1)
-0100011 sh rs2, offset(rs1)
-0100011 sw rs2, offset(rs1)
-0110011 add rd, rs1, rs2
-0010011 addi rd, rs1, imm
-0110011 sub rd, rs1, rs2
-0110111 lui rd, imm
-0010111 auipc rd, imm
-0110011 xor rd, rs1, rs2
-0010011 xori rd, rs1, imm
-0110011 or rd, rs1, rs2
-0010011 ori rd, rs1, imm
-0110011 and rd, rs1, rs2
-0010011 andi rd, rs1, imm
-0110011 sll rd, rs1, rs2
-0010011 slli rd, rs1, shamt
-0110011 srl rd, rs1, rs2
-0010011 srli rd, rs1, shamt
-0110011 sra rd, rs1, rs2
-0010011 srai rd, rs1, shamt
-0110011 slt rd, rs1, rs2
-0010011 slti rd, rs1, imm
-0110011 sltu rd, rs1, rs2
-0010011 sltiu rd, rs1, imm
-1100011 beq rs1, rs2, offset
-1100011 bne rs1, rs2, offset
-1100011 blt rs1, rs2, offset
-1100011 bge rs1, rs2, offset
-1100011 bltu rs1, rs2, offset
-1100011 bgeu rs1, rs2, offset
-1101111 jal rd, offset
-1100111 jalr rd, rs1, offset
-0001111 fence pred, succ
-1110011 ecall
-1110011 ebreak
+32 bit
+|imm/f7 |r2/i |r1/i |f/i|rd/i |opcode |
+|-------|-----|-----|---|-----|-------|
+|   imm_12    | rs1 |000| rd  |0000011|  // lb:     load byte
+|   imm_12    | rs1 |001| rd  |0000011|  // lh:     load half-word
+|   imm_12    | rs1 |010| rd  |0000011|  // lw:     load word
+|   imm_12    | rs1 |100| rd  |0000011|  // lbu:    load byte unsigned
+|   imm_12    | rs1 |101| rd  |0000011|  // lhu:    load half-word unsigned
+| imm_7 | rs2 | rs1 |000|imm_5|0100011|  // sb:     save byte
+| imm_7 | rs2 | rs1 |001|imm_5|0100011|  // sh:     save half-word
+| imm_7 | rs2 | rs1 |010|imm_5|0100011|  // sw:     save word
+|0000000| rs2 | rs1 |000| rd  |0110011|  // add:    add
+|0100000| rs2 | rs1 |000| rd  |0110011|  // sub:    sub
+|0000000| rs2 | rs1 |100| rd  |0110011|  // xor:    xor
+|0000000| rs2 | rs1 |110| rd  |0110011|  // or:     or
+|0000000| rs2 | rs1 |111| rd  |0110011|  // and:    and
+|0000000| rs2 | rs1 |001| rd  |0110011|  // sll:    shift left logical
+|0000000| rs2 | rs1 |101| rd  |0110011|  // srl:    shift right logical
+|0100000| rs2 | rs1 |101| rd  |0110011|  // sra:    shift right arithmetic
+|0000000| rs2 | rs1 |010| rd  |0110011|  // slt:    set less than
+|0000000| rs2 | rs1 |011| rd  |0110011|  // sltu:   set less than unsigned
+|   imm_12    | rs1 |000| rd  |0010011|  // addi:   add immediate
+|   imm_12    | rs1 |100| rd  |0010011|  // xori:   xor immediate
+|   imm_12    | rs1 |110| rd  |0010011|  // ori:    or immediate 
+|   imm_12    | rs1 |111| rd  |0010011|  // andi:   and immediate 
+|   imm_12    | rs1 |010| rd  |0010011|  // slti:   set less than immediate 
+|   imm_12    | rs1 |011| rd  |0010011|  // sltiu:  set less than immediate unsigned
+|0000000|imm_5| rs1 |001| rd  |0010011|  // slli:   shift left logical immediate 
+|0000000|imm_5| rs1 |101| rd  |0010011|  // srli:   shift right logical immediate 
+|0100000|imm_5| rs1 |101| rd  |0010011|  // srai:   shift right arithmetic immediate 
+| imm_7 | rs2 | rs1 |000|imm_5|1100011|  // beq:    branch if equal
+| imm_7 | rs2 | rs1 |001|imm_5|1100011|  // bne:    branch if not equal
+| imm_7 | rs2 | rs1 |100|imm_5|1100011|  // blt:    branch if less than
+| imm_7 | rs2 | rs1 |101|imm_5|1100011|  // bge:    branch if greater than or equal
+| imm_7 | rs2 | rs1 |110|imm_5|1100011|  // bltu:   branch if less than unsigned
+| imm_7 | rs2 | rs1 |111|imm_5|1100011|  // bgeu:   branch if greater than or equal unsigned
+|        imm_20         | rd  |0110111|  // lui:    load upper immediate 
+|        imm_20         | rd  |0010111|  // auipc:  add upper immediate to pc
+|        imm_20         | rd  |1101111|  // jal:    jump and link
+|   imm_12    | rs1 |000| rd  |1100111|  // jalr:   jump and link register
+|0000000 00000 00000 000 00000|0001111|  // fence:  fence
+|0000000 00000 00000 000 00000|1110011|  // ecall:  ecall
+|0000000 00001 00000 000 00000|1110011|  // ebreak: ebreak
 
-0000011 lb, lh, lw, lbu, lhu
-0001111 fence
-0010011 addi, xori, ori, andi, slli, srli, srai, slti, sltiu
-0010111 aupic
-0100011 sb, sh, sw
-0110011 add, sub, xor, or, and, sll, srl, sra, slt, sltu
-0110111 lui
-1100011 beq, bne, blt, bge, bltu, bgeu
-1100111 jalr
-1101111 jal
-1110011 ecall, ebreak
+CPU i/o
+
+input:
+- read_value[32]
+- instruction[32]
+- clock[1]
+- reset[1]
+output:
+- address[32]
+- write_value[32]
+- write_enable[4]
+    - 0000: no write
+    - 0001: write byte 0
+    - 0010: write byte 1
+    - 0100: write byte 2
+    - 1000: write byte 3
+- read[1]
+- pc[32]
+
+ALU i/o
+
+input:
+- a[32]
+- b[32]
+- alu_op[6]
+    - sub[1]: a+b -> a-b
+    - logic[2]
+        - 00: and
+        - 01: or
+        - 10: xor
+        - 11: output b
+    - shift[1]: other -> shifter
+    - arith/signed[1]
+        - 0: logic shift/unsigned comp
+        - 1: arithmetic shift/signed comp
+    - comp[1]: result = 0 | 1
+output:
+- result[32]
+- zero[1]
+- neg[1]
