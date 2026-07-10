@@ -1,49 +1,48 @@
 32 bit
-|imm/f7 |r2/i |r1/i |f/i|rd/i |opcode |
-|-------|-----|-----|---|-----|-------|
-|   imm_12    | rs1 |000| rd  |0000011|  // lb:     load byte
-|   imm_12    | rs1 |001| rd  |0000011|  // lh:     load half-word
-|   imm_12    | rs1 |010| rd  |0000011|  // lw:     load word
-|   imm_12    | rs1 |100| rd  |0000011|  // lbu:    load byte unsigned
-|   imm_12    | rs1 |101| rd  |0000011|  // lhu:    load half-word unsigned
-| imm_7 | rs2 | rs1 |000|imm_5|0100011|  // sb:     save byte
-| imm_7 | rs2 | rs1 |001|imm_5|0100011|  // sh:     save half-word
-| imm_7 | rs2 | rs1 |010|imm_5|0100011|  // sw:     save word
-|0000000| rs2 | rs1 |000| rd  |0110011|  // add:    add
-|0100000| rs2 | rs1 |000| rd  |0110011|  // sub:    sub
-|0000000| rs2 | rs1 |100| rd  |0110011|  // xor:    xor
-|0000000| rs2 | rs1 |110| rd  |0110011|  // or:     or
-|0000000| rs2 | rs1 |111| rd  |0110011|  // and:    and
-|0000000| rs2 | rs1 |001| rd  |0110011|  // sll:    shift left logical
-|0000000| rs2 | rs1 |101| rd  |0110011|  // srl:    shift right logical
-|0100000| rs2 | rs1 |101| rd  |0110011|  // sra:    shift right arithmetic
-|0000000| rs2 | rs1 |010| rd  |0110011|  // slt:    set less than
-|0000000| rs2 | rs1 |011| rd  |0110011|  // sltu:   set less than unsigned
-|   imm_12    | rs1 |000| rd  |0010011|  // addi:   add immediate
-|   imm_12    | rs1 |100| rd  |0010011|  // xori:   xor immediate
-|   imm_12    | rs1 |110| rd  |0010011|  // ori:    or immediate 
-|   imm_12    | rs1 |111| rd  |0010011|  // andi:   and immediate 
-|   imm_12    | rs1 |010| rd  |0010011|  // slti:   set less than immediate 
-|   imm_12    | rs1 |011| rd  |0010011|  // sltiu:  set less than immediate unsigned
-|0000000|imm_5| rs1 |001| rd  |0010011|  // slli:   shift left logical immediate 
-|0000000|imm_5| rs1 |101| rd  |0010011|  // srli:   shift right logical immediate 
-|0100000|imm_5| rs1 |101| rd  |0010011|  // srai:   shift right arithmetic immediate 
-| imm_7 | rs2 | rs1 |000|imm_5|1100011|  // beq:    branch if equal
-| imm_7 | rs2 | rs1 |001|imm_5|1100011|  // bne:    branch if not equal
-| imm_7 | rs2 | rs1 |100|imm_5|1100011|  // blt:    branch if less than
-| imm_7 | rs2 | rs1 |101|imm_5|1100011|  // bge:    branch if greater than or equal
-| imm_7 | rs2 | rs1 |110|imm_5|1100011|  // bltu:   branch if less than unsigned
-| imm_7 | rs2 | rs1 |111|imm_5|1100011|  // bgeu:   branch if greater than or equal unsigned
-|        imm_20         | rd  |0110111|  // lui:    load upper immediate 
-|        imm_20         | rd  |0010111|  // auipc:  add upper immediate to pc
-|        imm_20         | rd  |1101111|  // jal:    jump and link
-|   imm_12    | rs1 |000| rd  |1100111|  // jalr:   jump and link register
-|0000000 00000 00000 000 00000|0001111|  // fence:  fence
-|0000000 00000 00000 000 00000|1110011|  // ecall:  ecall
-|0000000 00001 00000 000 00000|1110011|  // ebreak: ebreak
+|imm/f7 |r2/i |r1/i |f/i|rd/i | opcode  |
+|-------|-----|-----|---|-----|--- -- --|
+|   imm_12    | rs1 |000| rd  |000 00 11|  // lb:     load byte
+|   imm_12    | rs1 |001| rd  |000 00 11|  // lh:     load half-word
+|   imm_12    | rs1 |010| rd  |000 00 11|  // lw:     load word
+|   imm_12    | rs1 |100| rd  |000 00 11|  // lbu:    load byte unsigned
+|   imm_12    | rs1 |101| rd  |000 00 11|  // lhu:    load half-word unsigned
+| imm_7 | rs2 | rs1 |000|imm_5|010 00 11|  // sb:     store byte
+| imm_7 | rs2 | rs1 |001|imm_5|010 00 11|  // sh:     store half-word
+| imm_7 | rs2 | rs1 |010|imm_5|010 00 11|  // sw:     store word
+|0000000| rs2 | rs1 |000| rd  |011 00 11|  // add:    add
+|0100000| rs2 | rs1 |000| rd  |011 00 11|  // sub:    sub
+|0000000| rs2 | rs1 |100| rd  |011 00 11|  // xor:    xor
+|0000000| rs2 | rs1 |110| rd  |011 00 11|  // or:     or
+|0000000| rs2 | rs1 |111| rd  |011 00 11|  // and:    and
+|0000000| rs2 | rs1 |001| rd  |011 00 11|  // sll:    shift left logical
+|0000000| rs2 | rs1 |101| rd  |011 00 11|  // srl:    shift right logical
+|0100000| rs2 | rs1 |101| rd  |011 00 11|  // sra:    shift right arithmetic
+|0000000| rs2 | rs1 |010| rd  |011 00 11|  // slt:    set less than
+|0000000| rs2 | rs1 |011| rd  |011 00 11|  // sltu:   set less than unsigned
+|   imm_12    | rs1 |000| rd  |001 00 11|  // addi:   add immediate
+|   imm_12    | rs1 |100| rd  |001 00 11|  // xori:   xor immediate
+|   imm_12    | rs1 |110| rd  |001 00 11|  // ori:    or immediate 
+|   imm_12    | rs1 |111| rd  |001 00 11|  // andi:   and immediate 
+|   imm_12    | rs1 |010| rd  |001 00 11|  // slti:   set less than immediate 
+|   imm_12    | rs1 |011| rd  |001 00 11|  // sltiu:  set less than immediate unsigned
+|0000000|imm_5| rs1 |001| rd  |001 00 11|  // slli:   shift left logical immediate 
+|0000000|imm_5| rs1 |101| rd  |001 00 11|  // srli:   shift right logical immediate 
+|0100000|imm_5| rs1 |101| rd  |001 00 11|  // srai:   shift right arithmetic immediate 
+| imm_7 | rs2 | rs1 |000|imm_5|110 00 11|  // beq:    branch if equal
+| imm_7 | rs2 | rs1 |001|imm_5|110 00 11|  // bne:    branch if not equal
+| imm_7 | rs2 | rs1 |100|imm_5|110 00 11|  // blt:    branch if less than
+| imm_7 | rs2 | rs1 |101|imm_5|110 00 11|  // bge:    branch if greater than or equal
+| imm_7 | rs2 | rs1 |110|imm_5|110 00 11|  // bltu:   branch if less than unsigned
+| imm_7 | rs2 | rs1 |111|imm_5|110 00 11|  // bgeu:   branch if greater than or equal unsigned
+|        imm_20         | rd  |011 01 11|  // lui:    load upper immediate 
+|        imm_20         | rd  |001 01 11|  // auipc:  add upper immediate to pc
+|        imm_20         | rd  |110 11 11|  // jal:    jump and link
+|   imm_12    | rs1 |000| rd  |110 01 11|  // jalr:   jump and link register
+|0000000 00000 00000 000 00000|000 11 11|  // fence:  fence
+|0000000 00000 00000 000 00000|111 00 11|  // ecall:  ecall
+|0000000 00001 00000 000 00000|111 00 11|  // ebreak: ebreak
 
 CPU i/o
-
 input:
 - read_value[32]
 - instruction[32]
@@ -62,22 +61,26 @@ output:
 - pc[32]
 
 ALU i/o
-
 input:
 - a[32]
 - b[32]
 - alu_op[6]
-    - sub[1]: a+b -> a-b
+    - mode[2]
+        - 00: add/sub
+        - 01: logic
+        - 10: shift
+        - 11: compare
+    - sub/right[1]
+        - 0: add/left
+        - 1: sub/right
+    - arith/signed[1]
+        - 0: logic shift/signed comp
+        - 1: arithmetic shift/unsigned comp
     - logic[2]
         - 00: and
         - 01: or
         - 10: xor
         - 11: output b
-    - shift[1]: other -> shifter
-    - arith/signed[1]
-        - 0: logic shift/unsigned comp
-        - 1: arithmetic shift/signed comp
-    - comp[1]: result = 0 | 1
 output:
 - result[32]
 - zero[1]
