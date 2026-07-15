@@ -1,46 +1,102 @@
 32 bit
-|imm/f7 |r2/i |r1/i |f/i|rd/i | opcode  |
-|-------|-----|-----|---|-----|--- -- --|
-|   imm_12    | rs1 |000| rd  |000 00 11|  // lb:     load byte
-|   imm_12    | rs1 |001| rd  |000 00 11|  // lh:     load half-word
-|   imm_12    | rs1 |010| rd  |000 00 11|  // lw:     load word
-|   imm_12    | rs1 |100| rd  |000 00 11|  // lbu:    load byte unsigned
-|   imm_12    | rs1 |101| rd  |000 00 11|  // lhu:    load half-word unsigned
-| imm_7 | rs2 | rs1 |000|imm_5|010 00 11|  // sb:     store byte
-| imm_7 | rs2 | rs1 |001|imm_5|010 00 11|  // sh:     store half-word
-| imm_7 | rs2 | rs1 |010|imm_5|010 00 11|  // sw:     store word
-|0000000| rs2 | rs1 |000| rd  |011 00 11|  // add:    add
-|0100000| rs2 | rs1 |000| rd  |011 00 11|  // sub:    sub
-|0000000| rs2 | rs1 |100| rd  |011 00 11|  // xor:    xor
-|0000000| rs2 | rs1 |110| rd  |011 00 11|  // or:     or
-|0000000| rs2 | rs1 |111| rd  |011 00 11|  // and:    and
-|0000000| rs2 | rs1 |001| rd  |011 00 11|  // sll:    shift left logical
-|0000000| rs2 | rs1 |101| rd  |011 00 11|  // srl:    shift right logical
-|0100000| rs2 | rs1 |101| rd  |011 00 11|  // sra:    shift right arithmetic
-|0000000| rs2 | rs1 |010| rd  |011 00 11|  // slt:    set less than
-|0000000| rs2 | rs1 |011| rd  |011 00 11|  // sltu:   set less than unsigned
-|   imm_12    | rs1 |000| rd  |001 00 11|  // addi:   add immediate
-|   imm_12    | rs1 |100| rd  |001 00 11|  // xori:   xor immediate
-|   imm_12    | rs1 |110| rd  |001 00 11|  // ori:    or immediate 
-|   imm_12    | rs1 |111| rd  |001 00 11|  // andi:   and immediate 
-|   imm_12    | rs1 |010| rd  |001 00 11|  // slti:   set less than immediate 
-|   imm_12    | rs1 |011| rd  |001 00 11|  // sltiu:  set less than immediate unsigned
-|0000000|imm_5| rs1 |001| rd  |001 00 11|  // slli:   shift left logical immediate 
-|0000000|imm_5| rs1 |101| rd  |001 00 11|  // srli:   shift right logical immediate 
-|0100000|imm_5| rs1 |101| rd  |001 00 11|  // srai:   shift right arithmetic immediate 
-| imm_7 | rs2 | rs1 |000|imm_5|110 00 11|  // beq:    branch if equal
-| imm_7 | rs2 | rs1 |001|imm_5|110 00 11|  // bne:    branch if not equal
-| imm_7 | rs2 | rs1 |100|imm_5|110 00 11|  // blt:    branch if less than
-| imm_7 | rs2 | rs1 |101|imm_5|110 00 11|  // bge:    branch if greater than or equal
-| imm_7 | rs2 | rs1 |110|imm_5|110 00 11|  // bltu:   branch if less than unsigned
-| imm_7 | rs2 | rs1 |111|imm_5|110 00 11|  // bgeu:   branch if greater than or equal unsigned
-|        imm_20         | rd  |011 01 11|  // lui:    load upper immediate 
-|        imm_20         | rd  |001 01 11|  // auipc:  add upper immediate to pc
-|        imm_20         | rd  |110 11 11|  // jal:    jump and link
-|   imm_12    | rs1 |000| rd  |110 01 11|  // jalr:   jump and link register
-|0000000 00000 00000 000 00000|000 11 11|  // fence:  fence
-|0000000 00000 00000 000 00000|111 00 11|  // ecall:  ecall
-|0000000 00001 00000 000 00000|111 00 11|  // ebreak: ebreak
+|imm/f7 |r2/i |r1/i |f/i|rd/i |opcode |||ALU op|mode|reg|a b ||instruction
+|-------|-----|-----|---|-----|-------|||------|----|---|----||-----|-----
+|   imm_12    | rs1 |000| rd  |0000011|||000000| I  |110|0000||lb   |load byte
+|   imm_12    | rs1 |001| rd  |0000011|||000000| I  |110|0000||lh   |load half-word
+|   imm_12    | rs1 |010| rd  |0000011|||000000| I  |110|0000||lw   |load word
+|   imm_12    | rs1 |100| rd  |0000011|||000000| I  |110|0000||lbu  |load byte unsigned
+|   imm_12    | rs1 |101| rd  |0000011|||000000| I  |110|0000||lhu  |load half-word unsigned
+| imm_7 | rs2 | rs1 |000|imm_5|0100011|||000000| S  |011|0000||sb   |store byte
+| imm_7 | rs2 | rs1 |001|imm_5|0100011|||000000| S  |011|0000||sh   |store half-word
+| imm_7 | rs2 | rs1 |010|imm_5|0100011|||000000| S  |011|0000||sw   |store word
+|0000000| rs2 | rs1 |000| rd  |0110011|||000000| R  |111|0000||add  |add
+|0100000| rs2 | rs1 |000| rd  |0110011|||001000| R  |111|0000||sub  |sub
+|0000000| rs2 | rs1 |100| rd  |0110011|||010010| R  |111|0000||xor  |xor
+|0000000| rs2 | rs1 |110| rd  |0110011|||010001| R  |111|0000||or   |or
+|0000000| rs2 | rs1 |111| rd  |0110011|||010000| R  |111|0000||and  |and
+|0000000| rs2 | rs1 |001| rd  |0110011|||100000| R  |111|0000||sll  |shift left logical
+|0000000| rs2 | rs1 |101| rd  |0110011|||101000| R  |111|0000||srl  |shift right logical
+|0100000| rs2 | rs1 |101| rd  |0110011|||101100| R  |111|0000||sra  |shift right arithmetic
+|0000000| rs2 | rs1 |010| rd  |0110011|||110000| R  |111|0000||slt  |set less than
+|0000000| rs2 | rs1 |011| rd  |0110011|||110100| R  |111|0000||sltu |set less than unsigned
+|   imm_12    | rs1 |000| rd  |0010011|||000000| I  |110|0000||addi |add immediate
+|   imm_12    | rs1 |100| rd  |0010011|||010010| I  |110|0000||xori |xor immediate
+|   imm_12    | rs1 |110| rd  |0010011|||010001| I  |110|0000||ori  |or immediate 
+|   imm_12    | rs1 |111| rd  |0010011|||010000| I  |110|0000||andi |and immediate 
+|   imm_12    | rs1 |010| rd  |0010011|||100000| I  |110|0000||slti |set less than immediate 
+|   imm_12    | rs1 |011| rd  |0010011|||101000| I  |110|0000||sltiu|set less than immediate unsigned
+|0000000|imm_5| rs1 |001| rd  |0010011|||101100| I  |110|0000||slli |shift left logical immediate 
+|0000000|imm_5| rs1 |101| rd  |0010011|||110000| I  |110|0000||srli |shift right logical immediate 
+|0100000|imm_5| rs1 |101| rd  |0010011|||110100| I  |110|0000||srai |shift right arithmetic immediate 
+| imm_7 | rs2 | rs1 |000|imm_5|1100011|||110000| B  |011|0000||beq  |branch if equal
+| imm_7 | rs2 | rs1 |001|imm_5|1100011|||110000| B  |011|0000||bne  |branch if not equal
+| imm_7 | rs2 | rs1 |100|imm_5|1100011|||110000| B  |011|0000||blt  |branch if less than
+| imm_7 | rs2 | rs1 |101|imm_5|1100011|||110000| B  |011|0000||bge  |branch if greater than or equal
+| imm_7 | rs2 | rs1 |110|imm_5|1100011|||110100| B  |011|0000||bltu |branch if less than unsigned
+| imm_7 | rs2 | rs1 |111|imm_5|1100011|||110100| B  |011|0000||bgeu |branch if greater than or equal unsigned
+|        imm_20         | rd  |0110111|||010011| U  |100|0000||lui  |load upper immediate
+|        imm_20         | rd  |0010111|||000000| U  |100|0000||auipc|add upper immediate to pc
+|        imm_20         | rd  |1101111|||000000| J  |100|0000||jal  |jump and link
+|   imm_12    | rs1 |000| rd  |1100111|||000000| I  |110|0000||jalr |jump and link register
+|0000000 00000 00000 000 00000|0001111|||000000| I  |000|0000||fence|fence
+|0000000 00000 00000 000 00000|1110011|||000000| I  |000|0000||ecall|ecall
+|0000000 00001 00000 000 00000|1110011|||000000| I  |000|0000||ebreak|ebreak
+
+load:
+    ALU(rs1, imm, add) -> address
+    f3 -> mask
+    true -> read
+    read_value -> rd
+store:
+    ALU(rs1, imm, add) -> address
+    f3 -> mask
+    rs2 -> write_value
+    true -> write
+op:
+    ALU(rs1, rs2, f3) -> rd
+opi:
+    ALU(rs1, imm, f3) -> rd
+branch:
+    ALU(rs1, rs2, comp) -> zero, neg
+    zero, neg, f3 -> condition
+    mux(add(pc, imm), pc, condition) -> pc
+load upper immediate:
+    ALU(0, imm, only_b) -> rd
+add upper immediate to pc:
+    add(pc, imm) -> rd
+jump and link:
+    ALU(pc, 4, add) -> rd
+    add(pc, imm) -> pc
+jump and link register:
+    ALU(pc, 4, add) -> rd
+    ALU(rs1, imm, add) -> pc
+fence/ecall/ebreak:
+    Not yet implemented
+
+ALU(rs1, imm, add)
+ALU(rs1, imm, add)
+ALU(rs1, rs2, f3)
+ALU(rs1, imm, f3)
+ALU(rs1, rs2, comp)
+ALU(0, imm, only_b)
+ALU(pc, 4, add)
+ALU(pc, 4, add)
+ALU(rs1, imm, add)
+
+immediate
+|mode|31|30|29|28|27|26|25|24|23|22|21|20|19|18|17|16|15|14|13|12|11|10| 9| 8| 7| 6| 5| 4| 3| 2| 1| 0|
+|----|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+| I  |                            imm_h1                            |             imm_11             |
+| S  |                            imm_h1                            |      imm_6      |    imm_5     |
+| B  |                          imm_h1                           |l1|      imm_6      |   imm_4   |0 |
+| U  |                          imm_20                           |                 0                 |
+| J  |              imm_h1               |        imm_l8         |20|           imm_h10           |0 |
+
+ALU op[6]: mode[2], sub/right[1], arith/signed[1], logic[2]
+registers in[2]: read value, result, immediate
+registers op[3]: rs1, rs2, rd
+ALU a: rs1, ...
+ALU b: rs2, ...
 
 CPU i/o
 input:
@@ -51,7 +107,7 @@ input:
 output:
 - address[32]
 - write_value[32]
-- write_enable[4]
+- mask[4]
     - 0000: no write
     - 0001: write byte 0
     - 0010: write byte 1
@@ -85,3 +141,106 @@ output:
 - result[32]
 - zero[1]
 - neg[1]
+
+|xxxxxxxxxxxxxxxxx000xxxxx0000011| -> |000000110| _ _ _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx001xxxxx0000011| -> |000000110| _ _ _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx010xxxxx0000011| -> |000000110| _ _ _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx100xxxxx0000011| -> |000000110| _ _ _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx101xxxxx0000011| -> |000000110| _ _ _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx000xxxxx0100011| -> |000000011| _ _ _ _ _ _ _ 1 2
+|xxxxxxxxxxxxxxxxx001xxxxx0100011| -> |000000011| _ _ _ _ _ _ _ 1 2
+|xxxxxxxxxxxxxxxxx010xxxxx0100011| -> |000000011| _ _ _ _ _ _ _ 1 2
+|0000000xxxxxxxxxx000xxxxx0110011| -> |000000111| _ _ _ _ _ _ 0 1 2
+|0100000xxxxxxxxxx000xxxxx0110011| -> |001000111| _ _ 2 _ _ _ 0 1 2
+|0000000xxxxxxxxxx100xxxxx0110011| -> |010010111| _ 1 _ _ 4 _ 0 1 2
+|0000000xxxxxxxxxx110xxxxx0110011| -> |010001111| _ 1 _ _ _ 5 0 1 2
+|0000000xxxxxxxxxx111xxxxx0110011| -> |010000111| _ 1 _ _ _ _ 0 1 2
+|0000000xxxxxxxxxx001xxxxx0110011| -> |100000111| 0 _ _ _ _ _ 0 1 2
+|0000000xxxxxxxxxx101xxxxx0110011| -> |101000111| 0 _ 2 _ _ _ 0 1 2
+|0100000xxxxxxxxxx101xxxxx0110011| -> |101100111| 0 _ 2 3 _ _ 0 1 2
+|0000000xxxxxxxxxx010xxxxx0110011| -> |110000111| 0 1 _ _ _ _ 0 1 2
+|0000000xxxxxxxxxx011xxxxx0110011| -> |110100111| 0 1 _ 3 _ _ 0 1 2
+|xxxxxxxxxxxxxxxxx000xxxxx0010011| -> |000000110| _ _ _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx100xxxxx0010011| -> |010010110| _ 1 _ _ 4 _ 0 1 _
+|xxxxxxxxxxxxxxxxx110xxxxx0010011| -> |010001110| _ 1 _ _ _ 5 0 1 _
+|xxxxxxxxxxxxxxxxx111xxxxx0010011| -> |010000110| _ 1 _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx010xxxxx0010011| -> |100000110| 0 _ _ _ _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx011xxxxx0010011| -> |101000110| 0 _ 2 _ _ _ 0 1 _
+|0000000xxxxxxxxxx001xxxxx0010011| -> |101100110| 0 _ 2 3 _ _ 0 1 _
+|0000000xxxxxxxxxx101xxxxx0010011| -> |110000110| 0 1 _ _ _ _ 0 1 _
+|0100000xxxxxxxxxx101xxxxx0010011| -> |110100110| 0 1 _ 3 _ _ 0 1 _
+|xxxxxxxxxxxxxxxxx000xxxxx1100011| -> |110000011| 0 1 _ _ _ _ _ 1 2
+|xxxxxxxxxxxxxxxxx001xxxxx1100011| -> |110000011| 0 1 _ _ _ _ _ 1 2
+|xxxxxxxxxxxxxxxxx100xxxxx1100011| -> |110000011| 0 1 _ _ _ _ _ 1 2
+|xxxxxxxxxxxxxxxxx101xxxxx1100011| -> |110000011| 0 1 _ _ _ _ _ 1 2
+|xxxxxxxxxxxxxxxxx110xxxxx1100011| -> |110100011| 0 1 _ 3 _ _ _ 1 2
+|xxxxxxxxxxxxxxxxx111xxxxx1100011| -> |110100011| 0 1 _ 3 _ _ _ 1 2
+|xxxxxxxxxxxxxxxxxxxxxxxxx0110111| -> |010011100| _ 1 _ _ 4 5 0 _ _
+|xxxxxxxxxxxxxxxxxxxxxxxxx0010111| -> |000000100| _ _ _ _ _ _ 0 _ _
+|xxxxxxxxxxxxxxxxxxxxxxxxx1101111| -> |000000100| _ _ _ _ _ _ 0 _ _
+|xxxxxxxxxxxxxxxxx000xxxxx1100111| -> |000000110| _ _ _ _ _ _ 0 1 _
+|00000000000000000000000000001111| -> |000000000| _ _ _ _ _ _ _ _ _
+|00000000000000000000000001110011| -> |000000000| _ _ _ _ _ _ _ _ _
+|00000000000100000000000001110011| -> |000000000| _ _ _ _ _ _ _ _ _
+
+op[0]:
+    0010011|001|0000000
+    0010011|010|-------
+    0010011|011|-------
+    0010011|101|0000000
+    0010011|101|0100000
+    0110011|001|0000000
+    0110011|010|0000000
+    0110011|011|0000000
+    0110011|101|0000000
+    0110011|101|0100000
+    1100011|000|-------
+    1100011|001|-------
+    1100011|100|-------
+    1100011|101|-------
+    1100011|110|-------
+    1100011|111|-------
+
+op[1]:
+    0010011|100|-------
+    0010011|101|0000000
+    0010011|101|0100000
+    0010011|110|-------
+    0010011|111|-------
+    0110011|010|0000000
+    0110011|011|0000000
+    0110011|100|0000000
+    0110011|110|0000000
+    0110011|111|0000000
+    0110111|---|-------
+    1100011|000|-------
+    1100011|001|-------
+    1100011|100|-------
+    1100011|101|-------
+    1100011|110|-------
+    1100011|111|-------
+
+op[2]:
+    0010011|001|0000000
+    0010011|011|-------
+    0110011|000|0100000
+    0110011|101|0000000
+    0110011|101|0100000
+
+op[3]:
+    0010011|001|0000000
+    0010011|101|0100000
+    0110011|011|0000000
+    0110011|101|0100000
+    1100011|110|-------
+    1100011|111|-------
+
+op[4]:
+    0010011|100|-------
+    0110011|100|0000000
+    0110111|---|-------
+
+op[5]:
+    0010011|110|-------
+    0110011|110|0000000
+    0110111|---|-------
